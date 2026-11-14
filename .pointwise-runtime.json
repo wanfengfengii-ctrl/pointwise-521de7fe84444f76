@@ -1,0 +1,42 @@
+{
+  "description": "Nearest correlation matrix (correlation.nearest): verification and demonstration commands. Pure Python standard library; no dependencies to install.",
+  "runtime": {
+    "language": "python",
+    "python_version": ">=3.8",
+    "dependencies": "standard library only"
+  },
+  "commands": [
+    {
+      "name": "verify",
+      "description": "Independent verification suite: structural constraints (symmetry, unit diagonal, PSD), independently recomputed dual lower bound D and F-D gap, primal-dual consistency B+ = matrix, cross-check against an independently written Dykstra solver, permutation equivariance, repeated-eigenvalue and singular-optimum cases, sub-optimality of one-shot eigenvalue truncation, Qi-Sun literature example, and input validation. Exits non-zero on any failure.",
+      "command": "python3 -I verify.py",
+      "workdir": ".",
+      "expected_exit_code": 0,
+      "timeout_seconds": 300
+    },
+    {
+      "name": "demo",
+      "description": "Realistic monitoring-data demonstration: a pairwise-complete equity-sector correlation matrix and a four-name credit-book block, both non-PSD, with corrected matrix, dual vector, eigenvalues, objective F and lower bound D.",
+      "command": "python3 -I demo.py",
+      "workdir": ".",
+      "expected_exit_code": 0,
+      "timeout_seconds": 60
+    },
+    {
+      "name": "demo-custom-json",
+      "description": "Run the demonstration on a user-supplied correlation matrix given as a JSON array of arrays.",
+      "command": "python3 -I demo.py '[[1.0,-0.75,-0.75],[-0.75,1.0,-0.75],[-0.75,-0.75,1.0]]'",
+      "workdir": ".",
+      "expected_exit_code": 0,
+      "timeout_seconds": 60
+    },
+    {
+      "name": "demo-custom-file",
+      "description": "Run the demonstration on a correlation matrix stored as JSON in a file.",
+      "command": "python3 -I demo.py --file matrix.json",
+      "workdir": ".",
+      "expected_exit_code": 0,
+      "timeout_seconds": 60
+    }
+  ]
+}
